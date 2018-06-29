@@ -1,6 +1,6 @@
 library("openxlsx")
 library("zoo")
-setwd("/Users/jeffrey/desktop/github/financialanalysis/Historical Data")
+setwd("/Users/jleibowitz/desktop/github/financialanalysis/Historical Data/ABT")
 
 ABT<-read.csv("ABT.csv")
 ABT_financials<-read.xlsx("ABT_financials.xlsx",rowNames=T)
@@ -23,3 +23,5 @@ kept$Date<-as.Date(kept$Date)
 data<-merge(ABT,kept,by.x="Date",by.y="Date", all.y=TRUE, all.x=TRUE)
 
 data<-data[-c(1:7074),]
+data<-na.omit(data)
+write.xlsx(data,"ABT_financials_quarterlyinfo.xlsx")
